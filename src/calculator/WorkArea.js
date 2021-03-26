@@ -6,9 +6,12 @@ export default (props) => {
             <input style={
                 {
                     height: 200,
-                    width: 497,
+                    width: 350,
                     fontSize: 50,
-                    textAlign: "right"
+                    textAlign: "right",
+                    backgroundColor: 'rgba(1,1,1,0)',
+                    border: 0,
+                    boxSizing:"border-box"
                 }
             }
             value={props.content}/>
