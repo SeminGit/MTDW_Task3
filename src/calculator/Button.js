@@ -14,8 +14,9 @@ export default (props) => {
             <button onClick={props.clickHandler} style={
                 props.style ? props.style :
                 {
-                    width: 85.5,
-                    height: 76,
+                    width: 84.5,
+                    height: 77,
+                    margin: 0.5,
                     display:"flex",
                     justifyContent:"center",
                     alignItems:"center",
@@ -23,7 +24,8 @@ export default (props) => {
                     backgroundColor: 'rgba(255,255,255,0.2)',
                     border: 'rgba(1,1,1,0)',
                     color: "white",
-                    fontSize:30
+                    fontSize:30,
+                    fontFamily:'Coronetscript, cursive'
                 }
             } value={props.text}>{props.text}</button>
         </div>
