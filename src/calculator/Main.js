@@ -56,6 +56,11 @@ class Main extends Component {
             case '-':
             case 'x':
             case '/':
+                if(newContent == '' ||
+                    newContent.substr(newContent.length - 1).match(/[,+\-x/]/g) != null)
+                    break;
+                newContent += event.target.value;
+                break;
             case '%':
                 if(newContent == '' ||
                     newContent.substr(newContent.length - 1).match(/[,+\-x/%]/g) != null)
@@ -147,7 +152,8 @@ class Main extends Component {
                         border: 'rgba(1,1,1,0)',
                         color: "white",
                         fontSize:30,
-                        fontFamily:'Coronetscript, cursive'
+                        fontFamily:'Coronetscript, cursive',
+                        outline:'none'
                     }} text={"0"} clickHandler={this.clickHandler}/>
                     <Button text={","} clickHandler={this.clickHandler}/>
                     <Button text={"="} clickHandler={this.clickHandler}/>

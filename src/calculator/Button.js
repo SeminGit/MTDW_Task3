@@ -25,7 +25,8 @@ export default (props) => {
                     border: 'rgba(1,1,1,0)',
                     color: "white",
                     fontSize:30,
-                    fontFamily:'Coronetscript, cursive'
+                    fontFamily:'Coronetscript, cursive',
+                    outline:'none'
                 }
             } value={props.text}>{props.text}</button>
         </div>
