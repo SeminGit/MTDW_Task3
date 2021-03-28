@@ -52,6 +52,12 @@ class Main extends Component {
                 }
                 break;
             case ',':
+                if(newContent == '' ||
+                    newContent.substr(newContent.length - 1).match(/[,+\-x/]/g) != null
+                || (newContent + ',').match(/(\d+,\d+),/g) != null)
+                    break;
+                newContent += event.target.value;
+                break;
             case '+':
             case '-':
             case 'x':
