@@ -116,8 +116,8 @@ class Main extends Component {
           height: 600,
           marginLeft: 600,
           marginTop: 100,
-          border: 0,
-          background: 'linear-gradient(180deg, #4EA4DC 51.6%, #081925 161.2%)'
+          background: 'linear-gradient(180deg, #4EA4DC 51.6%, #081925 161.2%)',
+          display: 'inline-grid'
         }
       }>
         <WorkArea content={this.state.content}/>

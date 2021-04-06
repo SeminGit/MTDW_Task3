@@ -11,7 +11,8 @@ export default (props) => {
                 background: 'linear-gradient(166.66deg, #328CD0 25.32%, #081925 250.71%)',
                 borderColor: '#081925',
                 color: "white",
-                fontSize: 20
+                fontSize: 20,
+                borderRadius: 6
             }
       } value={props.text}>{props.text}</button>
     )
