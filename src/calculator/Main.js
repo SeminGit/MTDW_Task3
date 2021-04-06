@@ -16,7 +16,7 @@ class Main extends Component {
 
     switch (event.target.value) {
       case "+/-":
-        if (newContent == '') {
+        if (newContent === '') {
           break;
         }
 
@@ -24,16 +24,16 @@ class Main extends Component {
         const values = Array.from(newContent.matchAll(signWithDigitRegex));
         let toChange = values[values.length - 1][0]; // drop sign
 
-        if (toChange.indexOf('X') != -1 || toChange.indexOf('/') != -1) {
+        if (toChange.indexOf('X') !== -1 || toChange.indexOf('/') !== -1) {
           let newPart = '-' + toChange.substr(1);
 
-          if (toChange.substr(toChange.length - 1) == '%') {
+          if (toChange.substr(toChange.length - 1) === '%') {
             newPart += '%';
           }
           newContent = newContent.replace(new RegExp(/(\d[.]?)+%?$/g), newPart);
-        } else if (toChange.indexOf('+') != -1) {
+        } else if (toChange.indexOf('+') !== -1) {
           newContent = newContent.replace(new RegExp(/[+-/X]?(\d[.]?)+%?$/g), toChange.replace('+', '-'));
-        } else if (toChange.indexOf('-') != -1) {
+        } else if (toChange.indexOf('-') !== -1) {
           newContent = newContent.replace(new RegExp(/[+-/X]?(\d[.]?)+%?$/g), toChange.replace('-', '+'));
         } else {
           newContent = newContent.replace(new RegExp(/[+-/X]?(\d[.]?)+%?$/g), '-' + toChange);
@@ -45,13 +45,13 @@ class Main extends Component {
         break;
 
       case "=":
-        if (newContent == '') {
+        if (newContent === '') {
           break;
         }
 
         newContent = newContent.replaceAll("X", '*');
 
-        if (newContent.substr(0, 1) == '0' && !newContent.substr(0, 1).match(/\d/)) {
+        if (newContent.substr(0, 1) === '0' && !newContent.substr(0, 1).match(/\d/)) {
           newContent = newContent.replace('0', '');
         }
 
@@ -64,7 +64,7 @@ class Main extends Component {
         break;
 
       case '.':
-        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/]/g) != null || (newContent + '.').match(/(\d+.\d+)./g) != null) {
+        if (newContent === '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/]/g) != null || (newContent + '.').match(/(\d+.\d+)./g) != null) {
           break;
         }
 
@@ -75,14 +75,14 @@ class Main extends Component {
       case '-':
       case 'x':
       case '/':
-        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/]/g) != null) {
+        if (newContent === '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/]/g) != null) {
           break;
         }
 
         newContent += event.target.value;
         break;
       case '%':
-        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/%]/g) != null) {
+        if (newContent === '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/%]/g) != null) {
           break;
         }
 
@@ -90,7 +90,7 @@ class Main extends Component {
         break;
 
       case '√':
-        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/%]/g) != null) {
+        if (newContent === '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/%]/g) != null) {
           break;
         }
 
@@ -132,7 +132,7 @@ class Main extends Component {
   }
 
   evalPercent(arr, input) {
-    if (arr.length == 0) return input;
+    if (arr.length === 0) return input;
 
     console.log(input);
 
