@@ -1,0 +1,16 @@
+input {
+    width: 100%;
+    color: darkgray;
+    border: 3px solid #18476B;
+    border-radius: 8px;
+
+    font-size: 60px;
+    text-align: right;
+    background-color: #DFE3D8;
+    box-sizing: border-box;
+}
+
+.displayContainer {
+    padding-top: 40px;
+    padding-bottom: 20px;
+}

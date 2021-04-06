@@ -1,7 +1,7 @@
 .buttonsContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    margin: 10px;
+    height: 100%;
 }
 
 .plusButton {
@@ -13,10 +13,12 @@
 button {
     margin: 5px;
     background: linear-gradient(0deg, #4EA4DC -874.3%, #2BAFDE 180.3%);
-    border-color: #18476B;
+    border: 2px solid #18476B;
     color: white;
     font-size: 20px;
-    border-radius: 6px;
+    border-radius: 8px;
+    height: 50px;
+    transition: .5s;
 }
 
 button:hover:active {

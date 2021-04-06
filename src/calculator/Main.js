@@ -3,6 +3,7 @@ import WorkArea from "./WorkArea";
 import Button from "./Button";
 import ButtonsCss from './css/ButtonsCss.module.css';
 import CalculatorCss from './css/CalculatorCss.module.css';
+import DisplayCss from './css/DisplayCss.module.css'
 
 class Main extends Component {
 
@@ -152,31 +153,35 @@ class Main extends Component {
   render() {
     return (
       <div className={CalculatorCss.calculator}>
-        <WorkArea content={this.state.content}/>
-        <div className={ButtonsCss.buttonsContainer}>
-          <Button text={"OFF"} clickHandler={this.clickHandler}/>
-          <Button text={"+/-"} clickHandler={this.clickHandler}/>
-          <Button text={"√"} clickHandler={this.clickHandler}/>
-          <Button text={"%"} clickHandler={this.clickHandler}/>
-          <Button text={"MRC"} clickHandler={this.clickHandler}/>
-          <Button text={"M+"} clickHandler={this.clickHandler}/>
-          <Button text={"M-"} clickHandler={this.clickHandler}/>
-          <Button text={"-"} clickHandler={this.clickHandler}/>
-          <Button text={"7"} clickHandler={this.clickHandler}/>
-          <Button text={"8"} clickHandler={this.clickHandler}/>
-          <Button text={"9"} clickHandler={this.clickHandler}/>
-          <Button text={"X"} clickHandler={this.clickHandler}/>
-          <Button text={"4"} clickHandler={this.clickHandler}/>
-          <Button text={"5"} clickHandler={this.clickHandler}/>
-          <Button text={"6"} clickHandler={this.clickHandler}/>
-          <Button text={"-"} clickHandler={this.clickHandler}/>
-          <Button text={"1"} clickHandler={this.clickHandler}/>
-          <Button text={"2"} clickHandler={this.clickHandler}/>
-          <Button text={"3"} clickHandler={this.clickHandler}/>
-          <Button className={ButtonsCss.plusButton} text={"+"} clickHandler={this.clickHandler}/>
-          <Button text={"0"} clickHandler={this.clickHandler}/>
-          <Button text={"."} clickHandler={this.clickHandler}/>
-          <Button text={"="} clickHandler={this.clickHandler}/>
+        <div className={CalculatorCss.functionalAria}>
+          <div className={DisplayCss.displayContainer}>
+            <WorkArea content={this.state.content}/>
+          </div>
+          <div className={ButtonsCss.buttonsContainer}>
+            <Button text={"OFF"} clickHandler={this.clickHandler}/>
+            <Button text={"+/-"} clickHandler={this.clickHandler}/>
+            <Button text={"√"} clickHandler={this.clickHandler}/>
+            <Button text={"%"} clickHandler={this.clickHandler}/>
+            <Button text={"MRC"} clickHandler={this.clickHandler}/>
+            <Button text={"M+"} clickHandler={this.clickHandler}/>
+            <Button text={"M-"} clickHandler={this.clickHandler}/>
+            <Button text={"-"} clickHandler={this.clickHandler}/>
+            <Button text={"7"} clickHandler={this.clickHandler}/>
+            <Button text={"8"} clickHandler={this.clickHandler}/>
+            <Button text={"9"} clickHandler={this.clickHandler}/>
+            <Button text={"X"} clickHandler={this.clickHandler}/>
+            <Button text={"4"} clickHandler={this.clickHandler}/>
+            <Button text={"5"} clickHandler={this.clickHandler}/>
+            <Button text={"6"} clickHandler={this.clickHandler}/>
+            <Button text={"-"} clickHandler={this.clickHandler}/>
+            <Button text={"1"} clickHandler={this.clickHandler}/>
+            <Button text={"2"} clickHandler={this.clickHandler}/>
+            <Button text={"3"} clickHandler={this.clickHandler}/>
+            <Button className={ButtonsCss.plusButton} text={"+"} clickHandler={this.clickHandler}/>
+            <Button text={"0"} clickHandler={this.clickHandler}/>
+            <Button text={"."} clickHandler={this.clickHandler}/>
+            <Button text={"="} clickHandler={this.clickHandler}/>
+          </div>
         </div>
       </div>
     )
