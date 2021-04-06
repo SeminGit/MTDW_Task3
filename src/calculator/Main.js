@@ -14,70 +14,92 @@ class Main extends Component {
 
     switch (event.target.value) {
       case "+/-":
-        if (newContent == '') break;
-        let changeMark = new RegExp(/[+\-x/]?(\d,?)+/g);
+        if (newContent == '') {
+          break;
+        }
+
+        let changeMark = new RegExp(/[+\-x/]?(\d[,.]?)+/g);
         let values = Array.from(newContent.matchAll(changeMark));
         let toChange = values[values.length - 1][0];
-        if (toChange.indexOf('x') != -1 || toChange.indexOf('/') != -1) {
-          // let newPart = toChange.substr(0, 1);
-          let newPart = '-';
-          newPart += toChange.substr(1);
 
-          if (toChange.substr(toChange.length - 1) == '%')
+        console.log(changeMark);
+        console.log(values);
+        console.log(toChange);
+
+        if (toChange.indexOf('x') != -1 || toChange.indexOf('/') != -1) {
+          let newPart = '-' + toChange.substr(1);
+
+          if (toChange.substr(toChange.length - 1) == '%') {
             newPart += '%';
-          newContent = newContent.replace(new RegExp(/(\d,?)+%?$/g), newPart);
+          }
+          newContent = newContent.replace(new RegExp(/(\d[,.]?)+%?$/g), newPart);
         } else if (toChange.indexOf('+') != -1) {
-          newContent = newContent.replace(new RegExp(/[+-/*]?(\d,?)+%?$/g), toChange.replace('+', '-'));
+          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[,.]?)+%?$/g), toChange.replace('+', '-'));
         } else if (toChange.indexOf('-') != -1) {
-          newContent = newContent.replace(new RegExp(/[+-/*]?(\d,?)+%?$/g), toChange.replace('-', '+'));
+          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[,.]?)+%?$/g), toChange.replace('-', '+'));
         } else {
-          newContent = newContent.replace(new RegExp(/[+-/*]?(\d,?)+%?$/g), '-' + toChange);
+          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[,.]?)+%?$/g), '-' + toChange);
         }
         break;
+
       case "C":
         //newContent = newContent.substr(0, newContent.length - 1);
         newContent = '';
         break;
+
       case "=":
-        if (newContent == '')
+        if (newContent == '') {
           break;
+        }
         newContent = newContent.replaceAll("x", '*');
         newContent = newContent.replaceAll(",", '.');
-        if (newContent.substr(0, 1) == '0' && !newContent.substr(0, 1).match(/\d/))
+
+        if (newContent.substr(0, 1) == '0' && !newContent.substr(0, 1).match(/\d/)) {
           newContent = newContent.replace('0', '');
-        let reg = new RegExp(/\d*%/g);
-        newContent = this.evalPercent(Array.from(newContent.matchAll(reg)), newContent);
+        }
+
+        newContent = this.evalPercent(Array.from(newContent.matchAll(new RegExp(/\d*%/g))), newContent);
+
         try {
           newContent = String(eval(newContent).toFixed(2)).substr(0, 8);
         } catch (err) {
           newContent = '';
         }
+
         break;
+
       case ',':
-        if (newContent == '' ||
-          newContent.substr(newContent.length - 1).match(/[,+\-x/]/g) != null
-          || (newContent + ',').match(/(\d+,\d+),/g) != null)
+        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[,+\-x/]/g) != null || (newContent + ',').match(/(\d+[,.]\d+)[,.]/g) != null) {
           break;
+        }
+
         newContent += event.target.value;
         break;
+
       case '+':
       case '-':
       case 'x':
       case '/':
-        if (newContent == '' ||
-          newContent.substr(newContent.length - 1).match(/[,+\-x/]/g) != null)
+        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[,+\-x/]/g) != null) {
           break;
+        }
+
         newContent += event.target.value;
         break;
       case '%':
-        if (newContent == '' ||
-          newContent.substr(newContent.length - 1).match(/[,+\-x/%]/g) != null)
-          break;
+        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[,+\-x/%]/g) != null) {
+          break
+        }
+        ;
+
         newContent += event.target.value;
+
         break;
+
       default:
-        if (newContent.substr(newContent.length - 1).match(/%/g) == null)
+        if (newContent.substr(newContent.length - 1).match(/%/g) == null) {
           newContent += event.target.value;
+        }
     }
 
     this.setState({
