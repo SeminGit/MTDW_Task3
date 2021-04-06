@@ -11,6 +11,8 @@ class Main extends Component {
     content: ""
   }
 
+  memory = 0;
+
   clickHandler = (event) => {
     let newContent = this.state.content;
 
@@ -20,15 +22,11 @@ class Main extends Component {
           break;
         }
 
-        const signWithDigitRegex = new RegExp(/[+\-x/]?(\d.?)+/g);
+        const signWithDigitRegex = new RegExp(/[+\-X/]?(\d.?)+/g);
         const values = Array.from(newContent.matchAll(signWithDigitRegex));
         let toChange = values[values.length - 1][0]; // drop sign
 
-        console.log(signWithDigitRegex);
-        console.log(values);
-        console.log(toChange);
-
-        if (toChange.indexOf('x') != -1 || toChange.indexOf('/') != -1) {
+        if (toChange.indexOf('X') != -1 || toChange.indexOf('/') != -1) {
           let newPart = '-' + toChange.substr(1);
 
           if (toChange.substr(toChange.length - 1) == '%') {
@@ -36,15 +34,15 @@ class Main extends Component {
           }
           newContent = newContent.replace(new RegExp(/(\d[.]?)+%?$/g), newPart);
         } else if (toChange.indexOf('+') != -1) {
-          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[.]?)+%?$/g), toChange.replace('+', '-'));
+          newContent = newContent.replace(new RegExp(/[+-/X]?(\d[.]?)+%?$/g), toChange.replace('+', '-'));
         } else if (toChange.indexOf('-') != -1) {
-          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[.]?)+%?$/g), toChange.replace('-', '+'));
+          newContent = newContent.replace(new RegExp(/[+-/X]?(\d[.]?)+%?$/g), toChange.replace('-', '+'));
         } else {
-          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[.]?)+%?$/g), '-' + toChange);
+          newContent = newContent.replace(new RegExp(/[+-/X]?(\d[.]?)+%?$/g), '-' + toChange);
         }
         break;
 
-      case "C":
+      case "OFF":
         newContent = '';
         break;
 
@@ -53,24 +51,24 @@ class Main extends Component {
           break;
         }
 
-        newContent = newContent.replaceAll("x", '*');
+        newContent = newContent.replaceAll("X", '*');
 
         if (newContent.substr(0, 1) == '0' && !newContent.substr(0, 1).match(/\d/)) {
           newContent = newContent.replace('0', '');
         }
 
+        if (newContent[newContent.length - 1] === '√') {
+          newContent = newContent.substr(0, newContent.length - 1) + '**0.5';
+        }
+
         newContent = this.evalPercent(Array.from(newContent.matchAll(new RegExp(/\d*%/g))), newContent);
 
-        try {
-          newContent = String(eval(newContent).toFixed(2)).substr(0, 8);
-        } catch (err) {
-          newContent = '';
-        }
+        newContent = this.calculate(newContent);
 
         break;
 
       case '.':
-        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-x/]/g) != null || (newContent + '.').match(/(\d+.\d+)./g) != null) {
+        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/]/g) != null || (newContent + '.').match(/(\d+.\d+)./g) != null) {
           break;
         }
 
@@ -81,14 +79,14 @@ class Main extends Component {
       case '-':
       case 'x':
       case '/':
-        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-x/]/g) != null) {
+        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/]/g) != null) {
           break;
         }
 
         newContent += event.target.value;
         break;
       case '%':
-        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-x/%]/g) != null) {
+        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/%]/g) != null) {
           break;
         }
 
@@ -96,8 +94,43 @@ class Main extends Component {
 
         break;
 
+      case '√':
+        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-X√/%]/g) != null) {
+          break;
+        }
+
+        newContent += event.target.value;
+
+        break;
+
+      case 'M+':
+        if (newContent === '' || newContent.match(/[+\-X√/%]+/g) != null) {
+          break;
+        }
+
+        newContent = this.calculate(newContent + '+' + this.memory);
+
+        this.memory += Number(newContent);
+
+        break;
+
+      case 'M-':
+        if (newContent === '' || newContent.match(/[+\-X√/%]+/g) != null) {
+          break;
+        }
+
+        newContent = this.calculate(newContent + '-' + this.memory);
+
+        this.memory -= Number(newContent);
+
+        break;
+
+      case 'MRC':
+        this.memory = 0;
+        break;
+
       default:
-        if (newContent.substr(newContent.length - 1).match(/%/g) == null) {
+        if (newContent.substr(newContent.length - 1).match(/[%√]/g) == null) {
           newContent += event.target.value;
         }
     }
@@ -117,7 +150,6 @@ class Main extends Component {
     let options = new RegExp(/[+\-*/]/g);
 
     for (let i = 0; i < arr.length; i++) {
-
       let match = reg.exec(input);
       let toEv = input.substr(0, match.index);
       let isOptions = options.exec(toEv);
@@ -149,6 +181,13 @@ class Main extends Component {
     return input;
   }
 
+  calculate(content) {
+    try {
+      return String(eval(content).toFixed(2)).substr(0, 8);
+    } catch (err) {
+      return '';
+    }
+  }
 
   render() {
     return (
