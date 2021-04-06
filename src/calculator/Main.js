@@ -137,14 +137,18 @@ class Main extends Component {
       <div className={CalculatorCss.calculator}>
         <WorkArea content={this.state.content}/>
         <div className={ButtonsCss.buttonsContainer}>
-          <Button text={"C"} clickHandler={this.clickHandler}/>
+          <Button text={"OFF"} clickHandler={this.clickHandler}/>
           <Button text={"+/-"} clickHandler={this.clickHandler}/>
+          <Button text={"√"} clickHandler={this.clickHandler}/>
           <Button text={"%"} clickHandler={this.clickHandler}/>
-          <Button text={"/"} clickHandler={this.clickHandler}/>
+          <Button text={"MRC"} clickHandler={this.clickHandler}/>
+          <Button text={"M+"} clickHandler={this.clickHandler}/>
+          <Button text={"M-"} clickHandler={this.clickHandler}/>
+          <Button text={"-"} clickHandler={this.clickHandler}/>
           <Button text={"7"} clickHandler={this.clickHandler}/>
           <Button text={"8"} clickHandler={this.clickHandler}/>
           <Button text={"9"} clickHandler={this.clickHandler}/>
-          <Button text={"x"} clickHandler={this.clickHandler}/>
+          <Button text={"X"} clickHandler={this.clickHandler}/>
           <Button text={"4"} clickHandler={this.clickHandler}/>
           <Button text={"5"} clickHandler={this.clickHandler}/>
           <Button text={"6"} clickHandler={this.clickHandler}/>
@@ -152,7 +156,7 @@ class Main extends Component {
           <Button text={"1"} clickHandler={this.clickHandler}/>
           <Button text={"2"} clickHandler={this.clickHandler}/>
           <Button text={"3"} clickHandler={this.clickHandler}/>
-          <Button text={"+"} clickHandler={this.clickHandler}/>
+          <Button className={ButtonsCss.plusButton} text={"+"} clickHandler={this.clickHandler}/>
           <Button text={"0"} clickHandler={this.clickHandler}/>
           <Button text={"."} clickHandler={this.clickHandler}/>
           <Button text={"="} clickHandler={this.clickHandler}/>

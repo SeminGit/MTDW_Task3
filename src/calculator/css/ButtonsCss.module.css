@@ -1,8 +1,13 @@
 .buttonsContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
     margin: 10px;
+}
+
+.plusButton {
+    grid-row-start: 5;
+    grid-column-start: 4;
+    grid-row-end: 7;
 }
 
 button {

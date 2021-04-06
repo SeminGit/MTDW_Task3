@@ -3,6 +3,6 @@ import Styles from "./css/ButtonsCss.module.css";
 
 export default (props) => {
     return (
-      <button onClick={props.clickHandler} value={props.text}>{props.text}</button>
+      <button onClick={props.clickHandler} className={props.className} value={props.text}>{props.text}</button>
     )
 }
