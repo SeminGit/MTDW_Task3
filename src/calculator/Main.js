@@ -117,53 +117,29 @@ class Main extends Component {
           marginLeft: 600,
           marginTop: 100,
           border: 0,
-          background: 'linear-gradient(to bottom right, #ffbc00 30%, #fe006d 115%)'
-          //background: 'radial-gradient(at top left, #ffb100 50%, #fe006d 110%)'
+          background: 'linear-gradient(180deg, #4EA4DC 51.6%, #081925 161.2%)'
         }
       }>
         <WorkArea content={this.state.content}/>
-        <div style={{display: "block"}}>
+        <div style={{display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridTemplateRows: "repeat(5, 1fr)"}}>
           <Button text={"C"} clickHandler={this.clickHandler}/>
           <Button text={"+/-"} clickHandler={this.clickHandler}/>
           <Button text={"%"} clickHandler={this.clickHandler}/>
           <Button text={"/"} clickHandler={this.clickHandler}/>
-        </div>
-        <div style={{height: 79}}>
           <Button text={"7"} clickHandler={this.clickHandler}/>
           <Button text={"8"} clickHandler={this.clickHandler}/>
           <Button text={"9"} clickHandler={this.clickHandler}/>
           <Button text={"x"} clickHandler={this.clickHandler}/>
-        </div>
-        <div style={{height: 79}}>
           <Button text={"4"} clickHandler={this.clickHandler}/>
           <Button text={"5"} clickHandler={this.clickHandler}/>
           <Button text={"6"} clickHandler={this.clickHandler}/>
           <Button text={"-"} clickHandler={this.clickHandler}/>
-        </div>
-        <div style={{height: 79}}>
           <Button text={"1"} clickHandler={this.clickHandler}/>
           <Button text={"2"} clickHandler={this.clickHandler}/>
           <Button text={"3"} clickHandler={this.clickHandler}/>
           <Button text={"+"} clickHandler={this.clickHandler}/>
-        </div>
-        <div style={{height: 79}}>
-          <Button style={{
-            width: 172,
-            height: 77,
-            display: "flex",
-            justifyContent: "left",
-            padding: 20,
-            alignItems: "center",
-            textAlign: 'left',
-            boxSizing: "border-box",
-            backgroundColor: 'rgba(255,255,255,0.2)',
-            border: 'rgba(1,1,1,0)',
-            color: "white",
-            fontSize: 30,
-            fontFamily: 'Coronetscript, cursive',
-            outline: 'none'
-          }} text={"0"} clickHandler={this.clickHandler}/>
-          <Button text={","} clickHandler={this.clickHandler}/>
+          <Button text={"0"} clickHandler={this.clickHandler}/>
+          <Button text={"."} clickHandler={this.clickHandler}/>
           <Button text={"="} clickHandler={this.clickHandler}/>
         </div>
       </div>

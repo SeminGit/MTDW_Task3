@@ -38,10 +38,16 @@ export default class WorkArea extends Component {
         <input
           id='workArea'
           style={{
-            height: 200, width: 350, fontSize: 70,
-            textAlign: "right", paddingTop: 110,
-            backgroundColor: 'rgba(1,1,1,0)', border: 0,
-            boxSizing: "border-box", color: 'white', outline: 'none'
+            height: 200,
+            width: 350,
+            fontSize: 70,
+            textAlign: "right",
+            paddingTop: 110,
+            backgroundColor: '#4EA4DC',
+            border: 0,
+            boxSizing: "border-box",
+            color: 'white',
+            outline: 'none'
           }
           } value={this.props.content == this.state.text ? this.props.content : this.toFocus()}
           onfocusin={this.focusing}
