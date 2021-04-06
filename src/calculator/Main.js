@@ -6,11 +6,9 @@ import CalculatorCss from './css/CalculatorCss.module.css';
 import DisplayCss from './css/DisplayCss.module.css'
 
 class Main extends Component {
-
   state = {
     content: ""
   }
-
   memory = 0;
 
   clickHandler = (event) => {
@@ -62,9 +60,7 @@ class Main extends Component {
         }
 
         newContent = this.evalPercent(Array.from(newContent.matchAll(new RegExp(/\d*%/g))), newContent);
-
         newContent = this.calculate(newContent);
-
         break;
 
       case '.':
@@ -91,7 +87,6 @@ class Main extends Component {
         }
 
         newContent += event.target.value;
-
         break;
 
       case '√':
@@ -100,7 +95,6 @@ class Main extends Component {
         }
 
         newContent += event.target.value;
-
         break;
 
       case 'M+':
@@ -109,9 +103,7 @@ class Main extends Component {
         }
 
         newContent = this.calculate(newContent + '+' + this.memory);
-
         this.memory += Number(newContent);
-
         break;
 
       case 'M-':
@@ -120,9 +112,7 @@ class Main extends Component {
         }
 
         newContent = this.calculate(newContent + '-' + this.memory);
-
         this.memory -= Number(newContent);
-
         break;
 
       case 'MRC':
