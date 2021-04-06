@@ -165,7 +165,7 @@ class Main extends Component {
             <Button text={"MRC"} clickHandler={this.clickHandler}/>
             <Button text={"M+"} clickHandler={this.clickHandler}/>
             <Button text={"M-"} clickHandler={this.clickHandler}/>
-            <Button text={"-"} clickHandler={this.clickHandler}/>
+            <Button text={"/"} clickHandler={this.clickHandler}/>
             <Button text={"7"} clickHandler={this.clickHandler}/>
             <Button text={"8"} clickHandler={this.clickHandler}/>
             <Button text={"9"} clickHandler={this.clickHandler}/>
