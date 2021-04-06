@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import DisplayCss from './css/DisplayCss.module.css'
 
 export default class WorkArea extends Component {
 

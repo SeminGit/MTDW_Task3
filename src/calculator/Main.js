@@ -13,18 +13,17 @@ class Main extends Component {
   clickHandler = (event) => {
     let newContent = this.state.content;
 
-
     switch (event.target.value) {
       case "+/-":
         if (newContent == '') {
           break;
         }
 
-        let changeMark = new RegExp(/[+\-x/]?(\d[,.]?)+/g);
-        let values = Array.from(newContent.matchAll(changeMark));
-        let toChange = values[values.length - 1][0];
+        const signWithDigitRegex = new RegExp(/[+\-x/]?(\d.?)+/g);
+        const values = Array.from(newContent.matchAll(signWithDigitRegex));
+        let toChange = values[values.length - 1][0]; // drop sign
 
-        console.log(changeMark);
+        console.log(signWithDigitRegex);
         console.log(values);
         console.log(toChange);
 
@@ -34,18 +33,17 @@ class Main extends Component {
           if (toChange.substr(toChange.length - 1) == '%') {
             newPart += '%';
           }
-          newContent = newContent.replace(new RegExp(/(\d[,.]?)+%?$/g), newPart);
+          newContent = newContent.replace(new RegExp(/(\d[.]?)+%?$/g), newPart);
         } else if (toChange.indexOf('+') != -1) {
-          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[,.]?)+%?$/g), toChange.replace('+', '-'));
+          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[.]?)+%?$/g), toChange.replace('+', '-'));
         } else if (toChange.indexOf('-') != -1) {
-          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[,.]?)+%?$/g), toChange.replace('-', '+'));
+          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[.]?)+%?$/g), toChange.replace('-', '+'));
         } else {
-          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[,.]?)+%?$/g), '-' + toChange);
+          newContent = newContent.replace(new RegExp(/[+-/*]?(\d[.]?)+%?$/g), '-' + toChange);
         }
         break;
 
       case "C":
-        //newContent = newContent.substr(0, newContent.length - 1);
         newContent = '';
         break;
 
@@ -53,8 +51,8 @@ class Main extends Component {
         if (newContent == '') {
           break;
         }
+
         newContent = newContent.replaceAll("x", '*');
-        newContent = newContent.replaceAll(",", '.');
 
         if (newContent.substr(0, 1) == '0' && !newContent.substr(0, 1).match(/\d/)) {
           newContent = newContent.replace('0', '');
@@ -70,8 +68,8 @@ class Main extends Component {
 
         break;
 
-      case ',':
-        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[,+\-x/]/g) != null || (newContent + ',').match(/(\d+[,.]\d+)[,.]/g) != null) {
+      case '.':
+        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-x/]/g) != null || (newContent + '.').match(/(\d+.\d+)./g) != null) {
           break;
         }
 
@@ -82,17 +80,16 @@ class Main extends Component {
       case '-':
       case 'x':
       case '/':
-        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[,+\-x/]/g) != null) {
+        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-x/]/g) != null) {
           break;
         }
 
         newContent += event.target.value;
         break;
       case '%':
-        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[,+\-x/%]/g) != null) {
-          break
+        if (newContent == '' || newContent.substr(newContent.length - 1).match(/[.+\-x/%]/g) != null) {
+          break;
         }
-        ;
 
         newContent += event.target.value;
 
@@ -112,21 +109,41 @@ class Main extends Component {
 
   evalPercent(arr, input) {
     if (arr.length == 0) return input;
-    let reg = new RegExp(/[\d.,]*%/g);
+
+    console.log(input);
+
+    let reg = new RegExp(/[\d.]*%/g);
     let options = new RegExp(/[+\-*/]/g);
+
     for (let i = 0; i < arr.length; i++) {
+
       let match = reg.exec(input);
       let toEv = input.substr(0, match.index);
       let isOptions = options.exec(toEv);
+
       toEv = toEv.substr(0, toEv.length - 1);
+
       if (isOptions == null) {
         input = input.replace(match, '0');
       } else {
-        let toPercentage = eval(toEv.replace(',', '.'));
+        let toPercentage = eval(toEv);
         let percent = Number(match[0].replace('%', ''));
-        input = input.replace(match[0], String(toPercentage * (percent / 100)));
+
+        switch (isOptions[0]) {
+          case '*':
+            input = toPercentage * percent / 100 + '.00';
+            break;
+          case '/':
+            input = toPercentage * percent + '.00';
+            break;
+          case '+':
+            input = toPercentage + (toPercentage * percent / 100) + '.00';
+            break;
+          case '-':
+            input = toPercentage - (toPercentage * percent / 100) + '.00';
+            break;
+        }
       }
-      console.log("input: ", input, '   toEv: ', toEv);
     }
     return input;
   }
