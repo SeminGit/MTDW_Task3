@@ -1,6 +1,7 @@
 .buttonsContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 60px);
     height: 100%;
 }
 
@@ -16,8 +17,8 @@ button {
     border: 2px solid #18476B;
     color: white;
     font-size: 20px;
+    font-weight: bold;
     border-radius: 8px;
-    height: 50px;
     transition: .5s;
 }
 
