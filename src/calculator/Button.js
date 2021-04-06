@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "./Styles.module.css";
+import Styles from "./css/ButtonsCss.module.css";
 
 export default (props) => {
     return (

@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import WorkArea from "./WorkArea";
 import Button from "./Button";
+import ButtonsCss from './css/ButtonsCss.module.css';
+import CalculatorCss from './css/CalculatorCss.module.css';
 
 class Main extends Component {
 
@@ -132,18 +134,9 @@ class Main extends Component {
 
   render() {
     return (
-      <div style={
-        {
-          width: 350,
-          height: 600,
-          marginLeft: 600,
-          marginTop: 100,
-          background: 'linear-gradient(180deg, #4EA4DC 51.6%, #081925 161.2%)',
-          display: 'inline-grid'
-        }
-      }>
+      <div className={CalculatorCss.calculator}>
         <WorkArea content={this.state.content}/>
-        <div style={{display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridTemplateRows: "repeat(5, 1fr)"}}>
+        <div className={ButtonsCss.buttonsContainer}>
           <Button text={"C"} clickHandler={this.clickHandler}/>
           <Button text={"+/-"} clickHandler={this.clickHandler}/>
           <Button text={"%"} clickHandler={this.clickHandler}/>

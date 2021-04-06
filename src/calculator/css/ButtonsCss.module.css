@@ -1,5 +1,11 @@
+.buttonsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    margin: 10px;
+}
+
 button {
-    height: 50px;
     margin: 5px;
     background: linear-gradient(0deg, #4EA4DC -874.3%, #2BAFDE 180.3%);
     border-color: #18476B;
